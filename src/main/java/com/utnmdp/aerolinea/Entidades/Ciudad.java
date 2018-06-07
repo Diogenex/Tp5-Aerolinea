@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Ciudad
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_ciudad")
     private Integer id_ciudad;
 

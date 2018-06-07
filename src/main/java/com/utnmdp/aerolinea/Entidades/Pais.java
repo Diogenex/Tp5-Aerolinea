@@ -1,15 +1,20 @@
 package com.utnmdp.aerolinea.Entidades;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Pais
 {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "id_pais")
     private Integer id_pais;
+
+
+    @OneToMany(mappedBy="pais")
+    private List<Provincia> provincia;
 
     @Column(name = "nombre_pais", nullable = false , length = 150)
     private String nombre_pais;

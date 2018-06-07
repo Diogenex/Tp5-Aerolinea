@@ -7,15 +7,20 @@ public class Provincia
 {
 
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id_provincia")
         private Integer id_provincia;
+
+        @ManyToOne()
+        @JoinColumn(name="id_pais")
+        private Pais pais;
 
         @Column(name = "nombre_provincia", nullable = false, length = 150)
         private String nombre_provincia;
 
         @Column(name = "codigo_iata", nullable = false, length = 3)
         private String codigo_iata;
+
 
         public String getNombre_provincia()
         {
