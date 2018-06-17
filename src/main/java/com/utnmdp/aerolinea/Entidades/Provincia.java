@@ -1,45 +1,65 @@
 package com.utnmdp.aerolinea.Entidades;
 
-import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+@Table(name = "provincia")
 @Entity
 public class Provincia
 {
-
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id_provincia")
-        private Integer id_provincia;
+        private long id_provincia;
 
-        @ManyToOne()
-        @JoinColumn(name="id_pais")
-        private Pais pais;
+        /*@OneToOne(fetch= FetchType.EAGER)
+        @JoinColumn (name="id_pais", nullable = false)
+        @OnDelete(action = OnDeleteAction.CASCADE)
+        @JsonBackReference
+        private Pais pais;*/
 
-        @Column(name = "nombre_provincia", nullable = false, length = 150)
+        @NotNull
+        @Size(max = 150)
+        @Column(name = "nombre_provincia")
         private String nombre_provincia;
 
-        @Column(name = "codigo_iata", nullable = false, length = 3)
-        private String codigo_iata;
+
+        public void setId_provincia(long id_provincia) {
+        this.id_provincia = id_provincia;
+    }
+
+//        public void setPais(Pais pais) {
+//        this.pais = pais;
+//    }
 
 
         public String getNombre_provincia()
+
         {
             return nombre_provincia;
         }
+
 
         public void setNombre_provincia(String nombre_provincia)
         {
             this.nombre_provincia = nombre_provincia;
         }
 
-        public String getCodigo_iata()
+        public long getId_provincia()
         {
-            return codigo_iata;
+                return id_provincia;
         }
 
-        public void setCodigo_iata(String codigo_iata)
-        {
-            this.codigo_iata = codigo_iata;
-        }
+//        public Pais getPais()
+//        {
+//                return pais;
+//        }
+
 
 }

@@ -1,25 +1,34 @@
 package com.utnmdp.aerolinea.Entidades;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Pais
 {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue (strategy = GenerationType.AUTO)
     @Column (name = "id_pais")
     private Integer id_pais;
 
-
-    @OneToMany(mappedBy="pais")
-    private List<Provincia> provincia;
-
-    @Column(name = "nombre_pais", nullable = false , length = 150)
+    @Column(name = "nombre_pais", nullable = false , length = 100 , unique=true)
     private String nombre_pais;
 
-    @Column(name = "codigo_iso" , nullable = false , length = 2)
+//    @Column
+//    @JsonBackReference
+//    @JsonIgnore
+//    private List<Ciudad> ciudad;
+
+    @NotNull
+    @Column(name = "codigo_iso" , length = 2, unique=true)
     private String codigo_iso;
 
     public String getNombre_pais() {
@@ -36,5 +45,15 @@ public class Pais
 
     public void setCodigo_iso(String codigo_iso) {
         this.codigo_iso = codigo_iso;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Pais{" +
+                "id_pais=" + id_pais +
+                ", nombre_pais='" + nombre_pais + '\'' +
+                ", codigo_iso='" + codigo_iso + '\'' +
+                '}';
     }
 }

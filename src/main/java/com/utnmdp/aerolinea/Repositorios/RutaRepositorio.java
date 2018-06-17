@@ -1,4 +1,7 @@
 package com.utnmdp.aerolinea.Repositorios;
 
-public interface RutaRepositorio {
+import com.utnmdp.aerolinea.Entidades.Ruta;
+import org.springframework.data.repository.CrudRepository;
+
+public interface RutaRepositorio extends CrudRepository<Ruta, Long> {
 }
