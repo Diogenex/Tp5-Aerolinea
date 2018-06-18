@@ -31,7 +31,7 @@ public class ServicioRuta {
     }
 
     public void actualizarRuta(long id, Ruta ruta){
-        Optional<Ruta> porCambiar = dameUnaRuta(id);
+        Optional<Ruta> porCambiar = this.dameUnaRuta(id);
         if(porCambiar != null){
             porCambiar.get().setId_destino(ruta.getId_destino());
             porCambiar.get().setId_origen(ruta.getId_origen());

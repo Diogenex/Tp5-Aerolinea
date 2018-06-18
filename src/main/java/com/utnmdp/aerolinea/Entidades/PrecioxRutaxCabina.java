@@ -1,7 +1,5 @@
 package com.utnmdp.aerolinea.Entidades;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -14,18 +12,16 @@ public class PrecioxRutaxCabina {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "id_precio")
-    private Integer id_precio_cabina;
+    private long id_precio_cabina;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn (name="id_ruta", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonManagedReference
     private Ruta id_ruta_fk;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn (name="id_cabina", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonManagedReference
     private Cabina fk_cabina;
 
 
@@ -37,6 +33,22 @@ public class PrecioxRutaxCabina {
 
     @Column(name= "vigencia_desde")
     private Date vigencia_desde;
+
+    public long getId_precio_cabina() {
+        return id_precio_cabina;
+    }
+
+    public void setId_precio_cabina(long id_precio_cabina) {
+        this.id_precio_cabina = id_precio_cabina;
+    }
+
+    public Cabina getFk_cabina() {
+        return fk_cabina;
+    }
+
+    public void setFk_cabina(Cabina fk_cabina) {
+        this.fk_cabina = fk_cabina;
+    }
 
     public Integer getPrecio() {
         return precio;
