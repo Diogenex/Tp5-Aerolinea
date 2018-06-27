@@ -1,10 +1,11 @@
 package com.utnmdp.aerolinea.Servicios;
 
-import com.utnmdp.aerolinea.Entidades.PrecioxRutaxCabina;
 import com.utnmdp.aerolinea.Repositorios.PrecioxRutaxCabinaRepositorio;
+import com.utnmdp.aerolinea.entidades.PrecioxRutaxCabina;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,7 +22,9 @@ public class ServicioPrecioxRutaxCabina {
 
         return  precioxRutaxCabinaRepositorio.findById(id);
     }
-
+    public List<PrecioxRutaxCabina> damePrecioPorRuta(long id){
+        return precioxRutaxCabinaRepositorio.getByPrecioxRuta(id);
+    }
     public PrecioxRutaxCabina agregarPrecio (PrecioxRutaxCabina precio){
         return precioxRutaxCabinaRepositorio.save(precio);
     }

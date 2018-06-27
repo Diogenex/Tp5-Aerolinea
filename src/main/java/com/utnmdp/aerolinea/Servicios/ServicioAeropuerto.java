@@ -1,14 +1,14 @@
 package com.utnmdp.aerolinea.Servicios;
 
 
-import com.utnmdp.aerolinea.Entidades.Aeropuerto;
-import com.utnmdp.aerolinea.Entidades.Ciudad;
-import com.utnmdp.aerolinea.Entidades.Pais;
-import com.utnmdp.aerolinea.Entidades.Provincia;
 import com.utnmdp.aerolinea.Repositorios.AeropuertoRepositorio;
 import com.utnmdp.aerolinea.Repositorios.CiudadRepositorio;
 import com.utnmdp.aerolinea.Repositorios.PaisRepositorio;
 import com.utnmdp.aerolinea.Repositorios.ProvinciaRepositorio;
+import com.utnmdp.aerolinea.entidades.Aeropuerto;
+import com.utnmdp.aerolinea.entidades.Ciudad;
+import com.utnmdp.aerolinea.entidades.Pais;
+import com.utnmdp.aerolinea.entidades.Provincia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,58 +18,77 @@ import java.util.Optional;
 @Service
 public class ServicioAeropuerto {
 
-    @Autowired
-    private CiudadRepositorio ciudadRepositorio;
+        //Decidí meter los servicios de las entidades Ciudad, País y Provincia en esta clase ya que el aeropuerto está relacionada
+        //estrechamente con ellas
 
-    public Iterable<Ciudad> dameCiudades ()
+
+        //Servicio de Ciudad
+
+        @Autowired
+        private CiudadRepositorio ciudadRepositorio;
+
+        public Iterable<Ciudad> dameCiudades ()
     {
         return ciudadRepositorio.findAll();
     }
 
-    public Optional<Ciudad> dameUnaCiudad(long id){
+        public Optional<Ciudad> dameUnaCiudad(long id){
         return ciudadRepositorio.findById(id);
     }
 
+        public Ciudad dameCiudadPorNombre(String nombre){ return ciudadRepositorio.findCiudadByNombre(nombre); }
 
-    @Autowired
-    private PaisRepositorio paisRepositorio;
+        //Servicio Pais
 
-    public Iterable<Pais> damePaises ()
+        @Autowired
+        private PaisRepositorio paisRepositorio;
+
+        public Iterable<Pais> damePaises ()
     {
         return paisRepositorio.findAll();
     }
 
-    @Autowired
-    private ProvinciaRepositorio provinciaRepositorio;
+        public Optional<Pais> damePaisPorIso(String iso){
+            return paisRepositorio.findPaisByCodigoIso(iso);
+        }
 
-    public Iterable<Provincia> dameProvincias ()
+
+        //Servicio Provincia
+
+        @Autowired
+        private ProvinciaRepositorio provinciaRepositorio;
+
+        public Iterable<Provincia> dameProvincias ()
     {
         return provinciaRepositorio.findAll();
     }
 
 
-    @Autowired
-    private AeropuertoRepositorio aeropuertoRepositorio;
 
-    public List<Aeropuerto> dameAeropuertos ()
+        //Servicio Aeropuerto
+
+        @Autowired
+        private AeropuertoRepositorio aeropuertoRepositorio;
+
+        public List<Aeropuerto> dameAeropuertos ()
     {
         return (List<Aeropuerto>) aeropuertoRepositorio.findAll();
 }
 
-    public Optional<Aeropuerto> dameUnAeropuerto(long id){
+        public Optional<Aeropuerto> dameUnAeropuerto(long id){
         return aeropuertoRepositorio.findById(id);
     }
 
-    public Aeropuerto agregarAeropuerto( Aeropuerto aeropuerto){
+        public Aeropuerto agregarAeropuerto( Aeropuerto aeropuerto){
         return aeropuertoRepositorio.save(aeropuerto);
     }
 
-    public void  borrarAeropuerto(long id){
+        public void  borrarAeropuerto(long id){
          aeropuertoRepositorio.deleteById(id);
     }
 
-    public void actualizarAeropuerto(long id, Aeropuerto aeropuerto){
-         Optional<Aeropuerto> porCambiar = dameUnAeropuerto(id);
+        public void actualizarAeropuerto(long id, Aeropuerto aeropuerto){
+            Optional<Aeropuerto> porCambiar = dameUnAeropuerto(id);
                if(porCambiar != null){
                   porCambiar.get().setCiudad(aeropuerto.getCiudad());
                   porCambiar.get().setCodigo_iata(aeropuerto.getCodigo_iata());
@@ -77,6 +96,5 @@ public class ServicioAeropuerto {
                   this.agregarAeropuerto(porCambiar.get());
 
                }
-
-    }
+        }
 }

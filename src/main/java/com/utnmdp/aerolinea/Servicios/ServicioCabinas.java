@@ -1,12 +1,9 @@
 package com.utnmdp.aerolinea.Servicios;
 
-
-import com.utnmdp.aerolinea.Entidades.Cabina;
 import com.utnmdp.aerolinea.Repositorios.CabinaRepositorio;
+import com.utnmdp.aerolinea.entidades.Cabina;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Collection;
 import java.util.Optional;
 
 @Service
@@ -15,7 +12,7 @@ public class ServicioCabinas {
     @Autowired
     private CabinaRepositorio cabinaRepositorio;
 
-    public Collection<Cabina> dameCabinas(){
+    public Iterable<Cabina> dameCabinas(){
         return cabinaRepositorio.findAll();
     }
 

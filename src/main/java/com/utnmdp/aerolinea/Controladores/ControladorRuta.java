@@ -1,11 +1,13 @@
 package com.utnmdp.aerolinea.Controladores;
 
-import com.utnmdp.aerolinea.Entidades.Ruta;
 import com.utnmdp.aerolinea.Servicios.ServicioRuta;
+import com.utnmdp.aerolinea.entidades.Ruta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -31,6 +33,14 @@ public class ControladorRuta {
         public @ResponseBody
         Optional<Ruta> Ruta(@PathVariable long id) {
             return servicioRuta.dameUnaRuta(id);
+        }
+
+        //------------------- Ver Ruta por id -------------------------------------------------------------
+
+        @GetMapping(path = "Aeropuerto/{id}/Rutas", produces = MediaType.APPLICATION_JSON_VALUE)
+        public @ResponseBody
+        List<Ruta> RutaporOrigen(@PathVariable long id) {
+                return servicioRuta.verRutaOrigen(id);
         }
 
         //------------------- Agregar Ruta --------------------------------------------------------
